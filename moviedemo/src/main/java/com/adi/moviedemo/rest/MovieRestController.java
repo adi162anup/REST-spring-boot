@@ -3,6 +3,7 @@ package com.adi.moviedemo.rest;
 import com.adi.moviedemo.entity.Movie;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,10 @@ public class MovieRestController {
     @GetMapping("/movies")
     public List<Movie> getMovies() {
         return theMovies;
+    }
+
+    @GetMapping("/movies/{movieId}")
+    public Movie getMovieById(@PathVariable int movieId){
+        return theMovies.get(movieId);
     }
 }
