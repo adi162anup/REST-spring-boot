@@ -31,11 +31,12 @@ public class MovieRestController {
     }
 
     @GetMapping("/movies/{movieId}")
-    public Movie getMovieById(@PathVariable int movieId){
+    public Movie getMovieById(@PathVariable int movieId) throws Exception {
 
         if((movieId<0) || (movieId > theMovies.size())){
             throw new MovieNotFoundException("Movie ID not found - " + movieId);
         }
+
 
         return theMovies.get(movieId);
     }
@@ -50,5 +51,17 @@ public class MovieRestController {
         err.setTimeStamp(System.currentTimeMillis());
 
         return new ResponseEntity<>(err,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<MovieErrorResponse> handleException(Exception exc){
+
+        MovieErrorResponse err = new MovieErrorResponse();
+
+        err.setStatus(HttpStatus.BAD_REQUEST.value());
+        err.setMessage(exc.getMessage());
+        err.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
     }
 }
