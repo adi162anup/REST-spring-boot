@@ -1,8 +1,24 @@
 package com.adi.moviedemo.entity;
 
+import jakarta.persistence.*;
+import org.springframework.stereotype.Repository;
+
+@Entity
+@Table(name="movie")
 public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+
+    @Column(name="movie_name")
     private String movieName;
+
+    @Column(name="hero_name")
     private String heroName;
+
+    @Column(name="year")
     private int yearOfRelease;
 
     public Movie() {}
@@ -11,6 +27,14 @@ public class Movie {
         this.movieName = movieName;
         this.heroName = heroName;
         this.yearOfRelease = yearOfRelease;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMovieName() {
@@ -35,5 +59,15 @@ public class Movie {
 
     public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", movieName='" + movieName + '\'' +
+                ", heroName='" + heroName + '\'' +
+                ", yearOfRelease=" + yearOfRelease +
+                '}';
     }
 }
