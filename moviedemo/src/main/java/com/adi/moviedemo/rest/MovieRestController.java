@@ -1,9 +1,7 @@
 package com.adi.moviedemo.rest;
 
+import com.adi.moviedemo.dao.MovieDAO;
 import com.adi.moviedemo.entity.Movie;
-import jakarta.annotation.PostConstruct;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,31 +11,25 @@ import java.util.List;
 @RequestMapping("/api")
 public class MovieRestController {
 
-    private List<Movie> theMovies;
+    private MovieDAO movieDAO;
 
-    @PostConstruct
-    public void LoadData() {
-        theMovies = new ArrayList<>();
-        theMovies.add(new Movie("The Shawshank Redemption","Tim Robbins",1994));
-        theMovies.add(new Movie("The Godfather","Marlon Brando",1972));
-        theMovies.add(new Movie("The Dark Knight","Christian Bale",2008));
-        theMovies.add(new Movie("Schindler's List","Liam Neeson",1993));
-        theMovies.add(new Movie("Pulp Fiction","John Travolta",1994));
+    public MovieRestController(MovieDAO theMovieDAO){
+        movieDAO = theMovieDAO;
     }
 
     @GetMapping("/movies")
     public List<Movie> getMovies() {
-        return theMovies;
+        return movieDAO.getMovies();
     }
 
     @GetMapping("/movies/{movieId}")
     public Movie getMovieById(@PathVariable int movieId) throws Exception {
 
-        if((movieId<0) || (movieId > theMovies.size())){
+        if((movieId<1) || (movieId > movieDAO.getMovies().size())){
             throw new MovieNotFoundException("Movie ID not found - " + movieId);
         }
 
-        return theMovies.get(movieId);
+        return movieDAO.getMovies().get(movieId-1);
     }
 
 

@@ -19,7 +19,7 @@ public class MovieDAOJpaImpl implements MovieDAO{
     }
 
     @Override
-    public List<Movie> findAll() {
+    public List<Movie> getMovies() {
 
         TypedQuery<Movie> theQuery = entityManager.createQuery("from Movie", Movie.class);
 

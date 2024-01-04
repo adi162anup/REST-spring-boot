@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MovieDAO {
 
-    List<Movie> findAll();
+    List<Movie> getMovies();
 }
