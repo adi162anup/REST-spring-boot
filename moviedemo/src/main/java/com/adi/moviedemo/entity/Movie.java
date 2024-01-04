@@ -1,7 +1,6 @@
 package com.adi.moviedemo.entity;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Repository;
 
 @Entity
 @Table(name="movie")
