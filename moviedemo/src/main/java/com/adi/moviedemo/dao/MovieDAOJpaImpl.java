@@ -27,4 +27,28 @@ public class MovieDAOJpaImpl implements MovieDAO{
 
         return result;
     }
+
+    @Override
+    public Movie getMovieById(int theId) {
+
+        Movie theMovie = entityManager.find(Movie.class,theId);
+
+        return theMovie;
+    }
+
+    @Override
+    public Movie save(Movie theMovie) {
+
+        Movie dbMovie = entityManager.merge(theMovie);
+
+        return dbMovie;
+    }
+
+    @Override
+    public void delete(int theId) {
+
+        Movie theMovie = entityManager.find(Movie.class,theId);
+
+        entityManager.remove(theMovie);
+    }
 }
