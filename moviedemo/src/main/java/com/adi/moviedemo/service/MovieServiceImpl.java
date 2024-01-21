@@ -2,6 +2,7 @@ package com.adi.moviedemo.service;
 
 import com.adi.moviedemo.dao.MovieDAO;
 import com.adi.moviedemo.entity.Movie;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,22 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public List<Movie> getMovies() {
         return movieDAO.getMovies();
+    }
+
+    @Override
+    public Movie getMovieById(int theId) {
+        return movieDAO.getMovieById(theId);
+    }
+
+    @Transactional
+    @Override
+    public Movie save(Movie theMovie) {
+        return movieDAO.save(theMovie);
+    }
+
+    @Transactional
+    @Override
+    public void delete(int theId) {
+        movieDAO.delete(theId);
     }
 }
