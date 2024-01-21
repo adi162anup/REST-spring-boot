@@ -30,7 +30,7 @@ public class MovieRestController {
             throw new MovieNotFoundException("Movie ID not found - " + movieId);
         }
 
-        return movieService.getMovies().get(movieId-1);
+        return movieService.getMovieById(movieId);
     }
 
 
