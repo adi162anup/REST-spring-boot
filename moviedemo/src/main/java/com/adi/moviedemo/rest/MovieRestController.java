@@ -43,6 +43,14 @@ public class MovieRestController {
         return dbMovie;
     }
 
+    @PutMapping("/movies")
+    public Movie updateMovie(@RequestBody Movie theMovie) {
+
+        Movie dbMovie = movieService.save(theMovie);
+
+        return dbMovie;
+    }
+
 
 
 
