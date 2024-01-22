@@ -33,6 +33,16 @@ public class MovieRestController {
         return movieService.getMovieById(movieId);
     }
 
+    @PostMapping("/movies")
+    public Movie addMovie(@RequestBody Movie theMovie){
+
+        theMovie.setId(0);
+
+        Movie dbMovie = movieService.save(theMovie);
+
+        return dbMovie;
+    }
+
 
 
 
