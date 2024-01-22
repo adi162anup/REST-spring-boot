@@ -51,6 +51,21 @@ public class MovieRestController {
         return dbMovie;
     }
 
+    @DeleteMapping("/movies/{movieId}")
+    public String deleteMovie(@PathVariable int movieId) throws Exception {
+
+        Movie theMovie = movieService.getMovieById(movieId);
+
+        if(theMovie == null){
+            throw new MovieNotFoundException("Movie ID not found - " + movieId);
+        }
+
+        movieService.delete(movieId);
+
+        return "Movie ID " + movieId + " deleted";
+
+    }
+
 
 
 
