@@ -1,41 +1,55 @@
 package com.adi.moviedemo.service;
 
+import com.adi.moviedemo.dao.MovieRepository;
 import com.adi.moviedemo.entity.Movie;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService{
 
-    private MovieDAO movieDAO;
+    private MovieRepository movieRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieDAO theMovieDAO){
-        movieDAO = theMovieDAO;
+    public MovieServiceImpl(MovieRepository theMovieRepository){
+        movieRepository = theMovieRepository;
     }
 
     @Override
-    public List<Movie> getMovies() {
-        return movieDAO.getMovies();
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
     }
 
     @Override
-    public Movie getMovieById(int theId) {
-        return movieDAO.getMovieById(theId);
+    public Movie findById(int theId) {
+        Optional<Movie> result = movieRepository.findById(theId);
+
+        Movie theMovie = null;
+
+        if(result.isPresent()){
+            theMovie = result.get();
+        }
+
+        else{
+            throw new RuntimeException("Movie id - " + theId + " not found");
+        }
+
+        return theMovie;
     }
 
-    @Transactional
+
     @Override
     public Movie save(Movie theMovie) {
-        return movieDAO.save(theMovie);
+        return movieRepository.save(theMovie);
     }
 
-    @Transactional
+
     @Override
-    public void delete(int theId) {
-        movieDAO.delete(theId);
+    public void deleteById(int theId) {
+        movieRepository.deleteById(theId);
     }
 }

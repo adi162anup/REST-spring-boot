@@ -18,17 +18,19 @@ public class MovieRestController {
 
     @GetMapping("/movies")
     public List<Movie> getMovies() {
-        return movieService.getMovies();
+        return movieService.findAll();
     }
 
     @GetMapping("/movies/{movieId}")
     public Movie getMovieById(@PathVariable int movieId) throws Exception {
 
-        if((movieId<1) || (movieId > movieService.getMovies().size())){
+        Movie theMovie = movieService.findById(movieId);
+
+        if(theMovie == null){
             throw new MovieNotFoundException("Movie ID not found - " + movieId);
         }
 
-        return movieService.getMovieById(movieId);
+        return theMovie;
     }
 
     @PostMapping("/movies")
@@ -52,13 +54,13 @@ public class MovieRestController {
     @DeleteMapping("/movies/{movieId}")
     public String deleteMovie(@PathVariable int movieId) throws Exception {
 
-        Movie theMovie = movieService.getMovieById(movieId);
+        Movie theMovie = movieService.findById(movieId);
 
         if(theMovie == null){
             throw new MovieNotFoundException("Movie ID not found - " + movieId);
         }
 
-        movieService.delete(movieId);
+        movieService.deleteById(movieId);
 
         return "Movie ID " + movieId + " deleted";
 
