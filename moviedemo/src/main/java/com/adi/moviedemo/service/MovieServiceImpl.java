@@ -1,6 +1,5 @@
 package com.adi.moviedemo.service;
 
-import com.adi.moviedemo.dao.MovieDAO;
 import com.adi.moviedemo.entity.Movie;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
