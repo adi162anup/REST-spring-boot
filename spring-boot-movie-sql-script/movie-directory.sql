@@ -25,4 +25,29 @@ INSERT INTO `movie` VALUES
 	(3,'The Dark Knight','Christian Bale',2008),
 	(4,"Schindler's List",'Liam Neeson',1993),
 	(5,'Pulp Fiction','John Travolta',1994);
+    
+--
+-- Table structure for table `theatre`
+--
+
+DROP TABLE IF EXISTS `theatre`;
+
+CREATE TABLE `theatre` (
+  `theatre_id` int NOT NULL AUTO_INCREMENT,
+  `top_movie_name` varchar(45) DEFAULT NULL,
+  `theatre_name` varchar(45) DEFAULT NULL,
+  `location` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`theatre_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+--
+-- Data for table `theatre`
+--
+
+INSERT INTO `theatre` VALUES 
+	(1,'The Shawshank Redemption','PVR','Koramangala'),
+	(2,'The Godfather','Cinepolis','Whitefield'),
+	(3,'The Dark Knight','INOX','Yelahanka'),
+	(4,"Schindler's List",'Gopalan Cinemas','Mysore Road'),
+	(5,'Pulp Fiction','Rockline Cinemas','Yeshwantpur');
 
